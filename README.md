@@ -30,6 +30,8 @@ python -m uvicorn app:app --reload --port 8000 --no-access-log
 
 Visit `http://localhost:8000` and `http://localhost:8000/docs`.
 
+To change the website's wording, start with `web/index.html`. Dynamic labels live in `web/app.js`. The [manual editing guide](docs/EDITING.md) maps sections to files and explains how to publish changes.
+
 Or run the same service in its non-root, read-only container:
 
 ```bash

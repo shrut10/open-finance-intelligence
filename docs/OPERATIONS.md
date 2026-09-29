@@ -12,7 +12,7 @@ python scripts/smoke_test.py --base-url https://open-finance-intelligence.vercel
 python scripts/smoke_test.py --base-url https://open-finance-intelligence.vercel.app --require-generation
 ```
 
-Vercel can connect directly to `shrut10/open-finance-intelligence`. The initial release is also verified explicitly after deployment. GitHub Actions independently runs offline tests, lint checks and a Docker build followed by a real HTTP smoke test.
+Vercel is connected directly to `shrut10/open-finance-intelligence`. Commits pushed to `main` automatically trigger production deployment. GitHub Actions independently runs offline tests, lint checks and a Docker build followed by a real HTTP smoke test; it is not a deployment gate. The initial release is also verified explicitly after deployment.
 
 ## Generation configuration
 
