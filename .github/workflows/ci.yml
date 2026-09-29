@@ -31,7 +31,9 @@ jobs:
       - run: node --check web/app.js
       - run: pytest -q
       - name: Rebuild and evaluate licensed corpus offline
-        run: python scripts/evaluate_rag.py
+        run: |
+          python scripts/build_corpus.py
+          python scripts/evaluate_rag.py
       - name: Build serving container
         run: docker build -t open-finance-intelligence:ci .
       - name: Smoke-test the actual image
@@ -41,4 +43,3 @@ jobs:
       - name: Container logs
         if: failure()
         run: docker logs ofi || true
-
