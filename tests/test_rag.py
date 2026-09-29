@@ -34,6 +34,22 @@ def test_corpus_has_official_sources_and_licence_provenance():
         assert hashlib.sha256(raw.read_bytes()).hexdigest() == document["sha256"]
 
 
+def test_offline_rebuild_rejects_tampered_source(tmp_path, monkeypatch):
+    from scripts import build_corpus
+
+    source = build_corpus.SOURCES[0]
+    (tmp_path / "raw").mkdir()
+    (tmp_path / "raw" / source["filename"]).write_bytes(b"tampered")
+    (tmp_path / "manifest.json").write_text(
+        json.dumps(
+            {"documents": [{"id": source["id"], "sha256": hashlib.sha256(b"original").hexdigest()}]}
+        )
+    )
+    monkeypatch.setattr(build_corpus, "CORPUS", tmp_path)
+    with pytest.raises(ValueError, match="integrity"):
+        build_corpus.build()
+
+
 def test_passage_checksums_and_parent_references():
     index = rag.get_index()
     assert len(index.passages) >= 100

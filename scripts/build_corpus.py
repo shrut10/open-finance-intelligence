@@ -163,6 +163,9 @@ def build(refresh: bool = False) -> dict:
             retrieved_at = retrieved
         else:
             raw = path.read_bytes()
+            expected_hash = previous.get(source["id"], {}).get("sha256")
+            if expected_hash and hashlib.sha256(raw).hexdigest() != expected_hash:
+                raise ValueError(f"Source integrity check failed: {source['filename']}")
             retrieved_at = previous.get(source["id"], {}).get("retrieved_at", retrieved)
         doc = dict(
             source,

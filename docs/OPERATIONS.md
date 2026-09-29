@@ -8,6 +8,8 @@ The local process, Docker image and Vercel deployment use the same `app:app` ASG
 vercel link --project open-finance-intelligence
 vercel deploy --prod
 python scripts/smoke_test.py --base-url https://open-finance-intelligence.vercel.app
+# Verify the actual LLM connection separately (fallback does not count as success):
+python scripts/smoke_test.py --base-url https://open-finance-intelligence.vercel.app --require-generation
 ```
 
 Vercel can connect directly to `shrut10/open-finance-intelligence`. The initial release is also verified explicitly after deployment. GitHub Actions independently runs offline tests, lint checks and a Docker build followed by a real HTTP smoke test.
@@ -25,7 +27,7 @@ Vercel can connect directly to `shrut10/open-finance-intelligence`. The initial 
 
 An answer reports its actual mode. Retrieval works without a provider. Timeout, exhausted credits, missing configuration or failed generation validation produce a clearly labelled extractive fallback. Weak evidence produces abstention before any model request. Generation uses a bounded prompt and response, with no tools, browsing or autonomous actions.
 
-The deployment uses the existing Vercel Hobby workspace. No paid subscription or automatic credit top-up is configured by this project. Vercel AI Gateway documents a free monthly allowance for eligible accounts; availability and future terms can change. When the allowance is exhausted the evidence view remains useful through the extractive fallback. Do not add a billable provider key without setting that provider's budget controls first.
+The deployment uses the existing Vercel Hobby workspace. No paid subscription or automatic credit top-up is configured by this project. Vercel AI Gateway documents a free monthly allowance for eligible accounts, but may require payment-card verification before accepting even free-tier requests; availability and future terms can change. When access is unavailable or the allowance is exhausted the evidence view remains useful through the extractive fallback. Do not add a billable provider key without setting that provider's budget controls first.
 
 References: [FastAPI on Vercel](https://vercel.com/docs/frameworks/backend/fastapi), [AI Gateway Python authentication](https://vercel.com/docs/ai-gateway/sdks-and-apis/python), [AI Gateway pricing](https://vercel.com/docs/ai-gateway/pricing).
 

@@ -21,6 +21,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--base-url", default="http://127.0.0.1:8000")
     parser.add_argument("--attempts", type=int, default=1)
+    parser.add_argument(
+        "--require-generation",
+        action="store_true",
+        help="Fail unless the actual provider returns a validated LLM answer.",
+    )
     args = parser.parse_args()
     for attempt in range(args.attempts):
         try:
@@ -40,6 +45,13 @@ def main():
     answer = request(args.base_url, "/api/ask", {"question": "What is the UK inflation target?"})
     assert not answer["abstained"], answer
     assert answer["sources"] and answer["answer"]
+    if args.require_generation:
+        assert answer["mode"] == "grounded_llm", (
+            "Generation is required but returned "
+            + answer["mode"]
+            + ": "
+            + str(answer.get("reason"))
+        )
     negative = request(
         args.base_url, "/api/ask", {"question": "Give me a recipe for chocolate cake."}
     )
