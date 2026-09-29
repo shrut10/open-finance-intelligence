@@ -1,0 +1,23 @@
+{
+  "retrieved_at": "2026-09-29T10:44:08.146011+00:00",
+  "files": [
+    {
+      "path": "boe.csv",
+      "url": "https://www.bankofengland.co.uk/boeapps/database/_iadb-fromshowcolumns.asp?csv.x=yes&Datefrom=01/Jan/1988&Dateto=now&SeriesCodes=IUMABEDR,LPMAUYM&CSVF=TN&UsingCodes=Y&VPD=Y&VFD=N",
+      "sha256": "96e1a8f4ee7f3f807461771f05cb57797ebc02cce64a0f344762287a83bb6bce",
+      "bytes": 11945
+    },
+    {
+      "path": "ons_cpi.json",
+      "url": "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/d7g7/mm23/data",
+      "sha256": "1e610c9a632e63c26d7c7c1f4cb37483a54b1dfd15a70380f77164f1d7b4226f",
+      "bytes": 122131
+    },
+    {
+      "path": "ons_unemployment.json",
+      "url": "https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork/unemployment/timeseries/mgsx/lms/data",
+      "sha256": "a749d9c9990114a4ac48c14ab1d36569e254d88ecf76a4d937d8c5f26c4015c6",
+      "bytes": 174259
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+.git
+.github
+.venv
+.vercel
+.env*
+__pycache__
+.pytest_cache
+.ruff_cache
+node_modules
+docs
+tests
+CONTRACT.md
+.artifacts
+

@@ -1,0 +1,18 @@
+services:
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    environment:
+      OFI_LLM_ENABLED: ${OFI_LLM_ENABLED:-false}
+      OFI_LLM_BASE_URL: ${OFI_LLM_BASE_URL:-https://ai-gateway.vercel.sh/v1}
+      OFI_LLM_MODEL: ${OFI_LLM_MODEL:-}
+      OFI_LLM_API_KEY: ${OFI_LLM_API_KEY:-}
+

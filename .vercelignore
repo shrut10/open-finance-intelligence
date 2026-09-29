@@ -1,0 +1,12 @@
+.venv
+.git
+.artifacts
+.env*
+tests
+docs
+data/raw
+__pycache__
+.pytest_cache
+.ruff_cache
+CONTRACT.md
+

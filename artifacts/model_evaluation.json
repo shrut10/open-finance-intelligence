@@ -1,0 +1,632 @@
+{
+  "model_version": "v1-5ef88523c73f",
+  "snapshot_retrieved_at": "2026-09-29T10:44:08.146011+00:00",
+  "target": "UK all-items CPI annual inflation rate",
+  "unit": "percentage points",
+  "split": {
+    "train_start": "1990-01-31",
+    "train_end": "2018-12-31",
+    "validation_start": "2019-01-31",
+    "validation_end": "2021-12-31",
+    "test_start": "2022-01-31",
+    "test_end": "2026-08-31"
+  },
+  "sample_sizes": {
+    "train": 348,
+    "validation": 36,
+    "test": 56
+  },
+  "selection_rule": "Lowest validation MAE; test outcomes never select the served model.",
+  "validation_metrics": [
+    {
+      "model": "Persistence",
+      "mae": 0.347222,
+      "rmse": 0.460374
+    },
+    {
+      "model": "Seasonal naive",
+      "mae": 1.297222,
+      "rmse": 1.711481
+    },
+    {
+      "model": "Ridge regression",
+      "mae": 0.346781,
+      "rmse": 0.466776
+    },
+    {
+      "model": "Gradient boosting",
+      "mae": 0.343154,
+      "rmse": 0.470013
+    }
+  ],
+  "metrics": [
+    {
+      "model": "Persistence",
+      "mae": 0.405357,
+      "rmse": 0.601635
+    },
+    {
+      "model": "Seasonal naive",
+      "mae": 3.553571,
+      "rmse": 4.395452
+    },
+    {
+      "model": "Ridge regression",
+      "mae": 0.393308,
+      "rmse": 0.545903
+    },
+    {
+      "model": "Gradient boosting",
+      "mae": 1.053645,
+      "rmse": 1.670582
+    }
+  ],
+  "selected_model": "Gradient boosting",
+  "best_learned_model_on_validation": "Gradient boosting",
+  "importance_model": "Gradient boosting",
+  "importance_method": "Test MAE increase under 30 seeded permutations of contiguous 3-month blocks; percentage points.",
+  "importance": [
+    {
+      "feature": "cpi_lag_1",
+      "importance": 1.607703,
+      "std": 0.309718
+    },
+    {
+      "feature": "cpi_mean_3",
+      "importance": 0.068336,
+      "std": 0.022943
+    },
+    {
+      "feature": "cpi_lag_6",
+      "importance": 0.014127,
+      "std": 0.004667
+    },
+    {
+      "feature": "cpi_lag_12",
+      "importance": 0.006276,
+      "std": 0.004758
+    },
+    {
+      "feature": "m4_stock_growth_12_lag_2",
+      "importance": 0.003652,
+      "std": 0.006716
+    },
+    {
+      "feature": "unemployment_change_3",
+      "importance": 0.002165,
+      "std": 0.002892
+    },
+    {
+      "feature": "bank_rate_lag_2",
+      "importance": 0.000751,
+      "std": 0.001
+    },
+    {
+      "feature": "bank_rate_change_3",
+      "importance": 0.000274,
+      "std": 0.0011
+    },
+    {
+      "feature": "unemployment_lag_4",
+      "importance": 0.000178,
+      "std": 0.000198
+    },
+    {
+      "feature": "cpi_momentum",
+      "importance": 5.7e-05,
+      "std": 0.00722
+    },
+    {
+      "feature": "month_cos",
+      "importance": -0.000303,
+      "std": 0.000307
+    },
+    {
+      "feature": "month_sin",
+      "importance": -0.0027,
+      "std": 0.00158
+    },
+    {
+      "feature": "cpi_lag_2",
+      "importance": -0.00416,
+      "std": 0.001824
+    },
+    {
+      "feature": "cpi_lag_3",
+      "importance": -0.009295,
+      "std": 0.003622
+    }
+  ],
+  "learned_model_importance": [
+    {
+      "feature": "cpi_lag_1",
+      "importance": 1.607703,
+      "std": 0.309718
+    },
+    {
+      "feature": "cpi_mean_3",
+      "importance": 0.068336,
+      "std": 0.022943
+    },
+    {
+      "feature": "cpi_lag_6",
+      "importance": 0.014127,
+      "std": 0.004667
+    },
+    {
+      "feature": "cpi_lag_12",
+      "importance": 0.006276,
+      "std": 0.004758
+    },
+    {
+      "feature": "m4_stock_growth_12_lag_2",
+      "importance": 0.003652,
+      "std": 0.006716
+    },
+    {
+      "feature": "unemployment_change_3",
+      "importance": 0.002165,
+      "std": 0.002892
+    },
+    {
+      "feature": "bank_rate_lag_2",
+      "importance": 0.000751,
+      "std": 0.001
+    },
+    {
+      "feature": "bank_rate_change_3",
+      "importance": 0.000274,
+      "std": 0.0011
+    },
+    {
+      "feature": "unemployment_lag_4",
+      "importance": 0.000178,
+      "std": 0.000198
+    },
+    {
+      "feature": "cpi_momentum",
+      "importance": 5.7e-05,
+      "std": 0.00722
+    },
+    {
+      "feature": "month_cos",
+      "importance": -0.000303,
+      "std": 0.000307
+    },
+    {
+      "feature": "month_sin",
+      "importance": -0.0027,
+      "std": 0.00158
+    },
+    {
+      "feature": "cpi_lag_2",
+      "importance": -0.00416,
+      "std": 0.001824
+    },
+    {
+      "feature": "cpi_lag_3",
+      "importance": -0.009295,
+      "std": 0.003622
+    }
+  ],
+  "interval": {
+    "nominal_coverage": 0.9,
+    "radius": 1.161983,
+    "calibration_period": "2019\u20132021 validation",
+    "calibration_n": 36,
+    "test_coverage": 0.714286,
+    "test_mean_width": 2.323967
+  },
+  "backtest": [
+    {
+      "date": "2022-01-31",
+      "actual": 5.5,
+      "predicted": 5.774099,
+      "lower": 4.612116,
+      "upper": 6.936083
+    },
+    {
+      "date": "2022-02-28",
+      "actual": 6.2,
+      "predicted": 5.661446,
+      "lower": 4.499462,
+      "upper": 6.823429
+    },
+    {
+      "date": "2022-03-31",
+      "actual": 7.0,
+      "predicted": 6.231722,
+      "lower": 5.069738,
+      "upper": 7.393705
+    },
+    {
+      "date": "2022-04-30",
+      "actual": 9.0,
+      "predicted": 6.798498,
+      "lower": 5.636514,
+      "upper": 7.960481
+    },
+    {
+      "date": "2022-05-31",
+      "actual": 9.1,
+      "predicted": 6.698311,
+      "lower": 5.536328,
+      "upper": 7.860294
+    },
+    {
+      "date": "2022-06-30",
+      "actual": 9.4,
+      "predicted": 6.611413,
+      "lower": 5.44943,
+      "upper": 7.773397
+    },
+    {
+      "date": "2022-07-31",
+      "actual": 10.1,
+      "predicted": 6.668354,
+      "lower": 5.50637,
+      "upper": 7.830337
+    },
+    {
+      "date": "2022-08-31",
+      "actual": 9.9,
+      "predicted": 6.70819,
+      "lower": 5.546206,
+      "upper": 7.870173
+    },
+    {
+      "date": "2022-09-30",
+      "actual": 10.1,
+      "predicted": 6.773299,
+      "lower": 5.611316,
+      "upper": 7.935282
+    },
+    {
+      "date": "2022-10-31",
+      "actual": 11.1,
+      "predicted": 6.729379,
+      "lower": 5.567396,
+      "upper": 7.891362
+    },
+    {
+      "date": "2022-11-30",
+      "actual": 10.7,
+      "predicted": 6.830069,
+      "lower": 5.668085,
+      "upper": 7.992052
+    },
+    {
+      "date": "2022-12-31",
+      "actual": 10.5,
+      "predicted": 6.677444,
+      "lower": 5.515461,
+      "upper": 7.839428
+    },
+    {
+      "date": "2023-01-31",
+      "actual": 10.1,
+      "predicted": 6.642715,
+      "lower": 5.480731,
+      "upper": 7.804698
+    },
+    {
+      "date": "2023-02-28",
+      "actual": 10.4,
+      "predicted": 6.642715,
+      "lower": 5.480731,
+      "upper": 7.804698
+    },
+    {
+      "date": "2023-03-31",
+      "actual": 10.1,
+      "predicted": 6.72723,
+      "lower": 5.565246,
+      "upper": 7.889213
+    },
+    {
+      "date": "2023-04-30",
+      "actual": 8.7,
+      "predicted": 6.667426,
+      "lower": 5.505443,
+      "upper": 7.82941
+    },
+    {
+      "date": "2023-05-31",
+      "actual": 8.7,
+      "predicted": 6.682957,
+      "lower": 5.520973,
+      "upper": 7.84494
+    },
+    {
+      "date": "2023-06-30",
+      "actual": 7.9,
+      "predicted": 6.698496,
+      "lower": 5.536513,
+      "upper": 7.86048
+    },
+    {
+      "date": "2023-07-31",
+      "actual": 6.8,
+      "predicted": 6.704595,
+      "lower": 5.542612,
+      "upper": 7.866578
+    },
+    {
+      "date": "2023-08-31",
+      "actual": 6.7,
+      "predicted": 6.738422,
+      "lower": 5.576438,
+      "upper": 7.900405
+    },
+    {
+      "date": "2023-09-30",
+      "actual": 6.7,
+      "predicted": 6.707611,
+      "lower": 5.545628,
+      "upper": 7.869595
+    },
+    {
+      "date": "2023-10-31",
+      "actual": 4.6,
+      "predicted": 6.389905,
+      "lower": 5.227921,
+      "upper": 7.551888
+    },
+    {
+      "date": "2023-11-30",
+      "actual": 3.9,
+      "predicted": 4.336882,
+      "lower": 3.174899,
+      "upper": 5.498865
+    },
+    {
+      "date": "2023-12-31",
+      "actual": 4.0,
+      "predicted": 3.827088,
+      "lower": 2.665104,
+      "upper": 4.989071
+    },
+    {
+      "date": "2024-01-31",
+      "actual": 4.0,
+      "predicted": 3.839828,
+      "lower": 2.677844,
+      "upper": 5.001811
+    },
+    {
+      "date": "2024-02-29",
+      "actual": 3.4,
+      "predicted": 3.906298,
+      "lower": 2.744314,
+      "upper": 5.068281
+    },
+    {
+      "date": "2024-03-31",
+      "actual": 3.2,
+      "predicted": 3.263619,
+      "lower": 2.101636,
+      "upper": 4.425603
+    },
+    {
+      "date": "2024-04-30",
+      "actual": 2.3,
+      "predicted": 3.033676,
+      "lower": 1.871693,
+      "upper": 4.19566
+    },
+    {
+      "date": "2024-05-31",
+      "actual": 2.0,
+      "predicted": 2.192175,
+      "lower": 1.030192,
+      "upper": 3.354159
+    },
+    {
+      "date": "2024-06-30",
+      "actual": 2.0,
+      "predicted": 1.940873,
+      "lower": 0.778889,
+      "upper": 3.102856
+    },
+    {
+      "date": "2024-07-31",
+      "actual": 2.2,
+      "predicted": 1.942616,
+      "lower": 0.780633,
+      "upper": 3.104599
+    },
+    {
+      "date": "2024-08-31",
+      "actual": 2.2,
+      "predicted": 2.142162,
+      "lower": 0.980178,
+      "upper": 3.304145
+    },
+    {
+      "date": "2024-09-30",
+      "actual": 1.7,
+      "predicted": 2.234145,
+      "lower": 1.072162,
+      "upper": 3.396129
+    },
+    {
+      "date": "2024-10-31",
+      "actual": 2.3,
+      "predicted": 1.650158,
+      "lower": 0.488175,
+      "upper": 2.812142
+    },
+    {
+      "date": "2024-11-30",
+      "actual": 2.6,
+      "predicted": 2.372784,
+      "lower": 1.210801,
+      "upper": 3.534768
+    },
+    {
+      "date": "2024-12-31",
+      "actual": 2.5,
+      "predicted": 2.648515,
+      "lower": 1.486532,
+      "upper": 3.810499
+    },
+    {
+      "date": "2025-01-31",
+      "actual": 3.0,
+      "predicted": 2.456191,
+      "lower": 1.294208,
+      "upper": 3.618174
+    },
+    {
+      "date": "2025-02-28",
+      "actual": 2.8,
+      "predicted": 2.988304,
+      "lower": 1.826321,
+      "upper": 4.150288
+    },
+    {
+      "date": "2025-03-31",
+      "actual": 2.6,
+      "predicted": 2.55852,
+      "lower": 1.396536,
+      "upper": 3.720503
+    },
+    {
+      "date": "2025-04-30",
+      "actual": 3.5,
+      "predicted": 2.424843,
+      "lower": 1.26286,
+      "upper": 3.586826
+    },
+    {
+      "date": "2025-05-31",
+      "actual": 3.4,
+      "predicted": 3.2532,
+      "lower": 2.091217,
+      "upper": 4.415184
+    },
+    {
+      "date": "2025-06-30",
+      "actual": 3.6,
+      "predicted": 3.203188,
+      "lower": 2.041205,
+      "upper": 4.365172
+    },
+    {
+      "date": "2025-07-31",
+      "actual": 3.8,
+      "predicted": 3.239731,
+      "lower": 2.077747,
+      "upper": 4.401714
+    },
+    {
+      "date": "2025-08-31",
+      "actual": 3.8,
+      "predicted": 3.882157,
+      "lower": 2.720173,
+      "upper": 5.04414
+    },
+    {
+      "date": "2025-09-30",
+      "actual": 3.8,
+      "predicted": 3.967628,
+      "lower": 2.805644,
+      "upper": 5.129611
+    },
+    {
+      "date": "2025-10-31",
+      "actual": 3.6,
+      "predicted": 3.923972,
+      "lower": 2.761988,
+      "upper": 5.085955
+    },
+    {
+      "date": "2025-11-30",
+      "actual": 3.2,
+      "predicted": 3.282764,
+      "lower": 2.120781,
+      "upper": 4.444748
+    },
+    {
+      "date": "2025-12-31",
+      "actual": 3.4,
+      "predicted": 3.01038,
+      "lower": 1.848397,
+      "upper": 4.172364
+    },
+    {
+      "date": "2026-01-31",
+      "actual": 3.0,
+      "predicted": 3.245925,
+      "lower": 2.083942,
+      "upper": 4.407909
+    },
+    {
+      "date": "2026-02-28",
+      "actual": 3.0,
+      "predicted": 2.891051,
+      "lower": 1.729068,
+      "upper": 4.053035
+    },
+    {
+      "date": "2026-03-31",
+      "actual": 3.3,
+      "predicted": 2.878432,
+      "lower": 1.716449,
+      "upper": 4.040416
+    },
+    {
+      "date": "2026-04-30",
+      "actual": 2.8,
+      "predicted": 3.217711,
+      "lower": 2.055728,
+      "upper": 4.379695
+    },
+    {
+      "date": "2026-05-31",
+      "actual": 2.8,
+      "predicted": 2.629911,
+      "lower": 1.467928,
+      "upper": 3.791895
+    },
+    {
+      "date": "2026-06-30",
+      "actual": 2.6,
+      "predicted": 2.601272,
+      "lower": 1.439288,
+      "upper": 3.763255
+    },
+    {
+      "date": "2026-07-31",
+      "actual": 2.9,
+      "predicted": 2.480658,
+      "lower": 1.318675,
+      "upper": 3.642641
+    },
+    {
+      "date": "2026-08-31",
+      "actual": 3.1,
+      "predicted": 2.835073,
+      "lower": 1.67309,
+      "upper": 3.997056
+    }
+  ],
+  "caveats": [
+    "Retrospective evaluation of one latest/revised snapshot, not a real-time vintage backtest. Publication lags reduce look-ahead risk but cannot remove historical revision leakage.",
+    "A target-month estimate is made after prior-month CPI becomes available (typically within the target month). This is a next-observation forecast / current-month nowcast, not a forecast issued before that calendar month begins.",
+    "Features for target month t use CPI through t\u22121; Bank Rate and M4 through t\u22122; unemployment through centre month t\u22124. No future values, interpolation or backward fills are used.",
+    "MGSX is a rolling three-month unemployment estimate labelled by its centre month. Labour Force Survey quality/reweighting changes and overlap affect comparability.",
+    "M4 is non-seasonally-adjusted money stock. Its simple 12-month stock growth is not the official flow-adjusted M4 growth rate and can reflect reporting breaks.",
+    "The 90% interval uses validation absolute errors. Serial dependence, a short calibration window and structural change mean 90% coverage is not guaranteed. Test coverage is reported explicitly.",
+    "One fixed chronological split and a small prespecified candidate set are used. Test results were not used to pick a winner, tune parameters, or calibrate intervals.",
+    "Permutation importance is predictive sensitivity, not causality; correlated lag features can substitute for each other. No trading, monetary-policy or investment recommendation is implied."
+  ],
+  "baseline_comparison": {
+    "baseline": "Persistence",
+    "selected_model_test_mae": 1.053645,
+    "baseline_test_mae": 0.405357,
+    "mae_improvement_percent": -159.93,
+    "outperforms_baseline_on_test": false
+  },
+  "deployment_assessment": "Research demonstration only. The validation-selected model underperforms persistence on the test period; it is not approved for decision-making."
+}

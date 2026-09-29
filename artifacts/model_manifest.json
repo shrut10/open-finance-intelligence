@@ -1,0 +1,43 @@
+{
+  "version": "v1-5ef88523c73f",
+  "selection": "Gradient boosting",
+  "best_learned": "Gradient boosting",
+  "random_seed": 42,
+  "features": [
+    "cpi_lag_1",
+    "cpi_lag_2",
+    "cpi_lag_3",
+    "cpi_lag_6",
+    "cpi_lag_12",
+    "cpi_momentum",
+    "cpi_mean_3",
+    "bank_rate_lag_2",
+    "bank_rate_change_3",
+    "m4_stock_growth_12_lag_2",
+    "unemployment_lag_4",
+    "unemployment_change_3",
+    "month_sin",
+    "month_cos"
+  ],
+  "candidate_parameters": {
+    "Ridge regression": {
+      "alpha": 10.0,
+      "scaling": "standardise on training data only"
+    },
+    "Gradient boosting": {
+      "max_iter": 150,
+      "learning_rate": 0.05,
+      "max_leaf_nodes": 7,
+      "l2_regularization": 10.0,
+      "early_stopping": false
+    }
+  },
+  "training_snapshot_sha256": "5ef88523c73f9944c888c894d7bd413c98a294b70fa021afa4f28701db218d1a",
+  "code_sha256": "a77c07f29bc2fe89f627b02c619497dd5b3964c6a2148ea2db17ec93a7183684",
+  "dependencies": {
+    "numpy": "2.5.3",
+    "pandas": "2.3.3",
+    "sklearn": "1.9.1"
+  },
+  "serving": "Precomputed JSON forecast only. No arbitrary horizon or on-request retraining."
+}
