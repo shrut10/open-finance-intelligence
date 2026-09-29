@@ -23,7 +23,9 @@ Vercel can connect directly to `shrut10/open-finance-intelligence`. The initial 
 | `OFI_LLM_MODEL` | Exact provider model identifier |
 | `OFI_LLM_API_KEY` | Optional local or hosted secret |
 | `AI_GATEWAY_API_KEY` | Alternative Vercel AI Gateway credential |
-| `VERCEL_OIDC_TOKEN` | Automatic Vercel deployment credential for AI Gateway |
+| `VERCEL_OIDC_TOKEN` | Vercel OIDC credential for local development/build environments |
+
+At runtime Vercel supplies a fresh credential in the reserved `x-vercel-oidc-token` request header. The API passes it only into that request's generation call and only permits this on Vercel. It is never stored in global environment state, logged, or returned to clients. See the [OIDC reference](https://vercel.com/docs/oidc/reference).
 
 An answer reports its actual mode. Retrieval works without a provider. Timeout, exhausted credits, missing configuration or failed generation validation produce a clearly labelled extractive fallback. Weak evidence produces abstention before any model request. Generation uses a bounded prompt and response, with no tools, browsing or autonomous actions.
 

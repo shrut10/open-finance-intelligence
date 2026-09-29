@@ -148,6 +148,9 @@ def test_oidc_only_sent_to_exact_gateway_host(monkeypatch):
     assert rag._provider_config() is None
     monkeypatch.setenv("OFI_LLM_BASE_URL", "https://ai-gateway.vercel.sh/v1")
     assert rag._provider_config()[1] == "test-only-token"
+    assert rag._provider_config("fresh-request-token")[1] == "fresh-request-token"
+    monkeypatch.setenv("OFI_LLM_BASE_URL", "https://example.invalid/v1")
+    assert rag._provider_config("fresh-request-token") is None
 
 
 def test_failed_generation_returns_explicit_extracts(monkeypatch):

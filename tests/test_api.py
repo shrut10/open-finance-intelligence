@@ -109,6 +109,34 @@ def test_rate_limited_api_response(client, monkeypatch):
     assert response.headers["Retry-After"] == "60"
 
 
+def test_runtime_oidc_is_request_scoped_and_not_returned(client, monkeypatch):
+    from ofi import rag
+
+    seen = []
+
+    def fake_answer(question, *, oidc_token=None):
+        seen.append(oidc_token)
+        return {"answer": "Test evidence", "mode": "grounded_llm", "abstained": False}
+
+    monkeypatch.setattr(rag, "answer_question", fake_answer)
+    monkeypatch.setenv("VERCEL", "1")
+    for token in ["first-request-token", "second-request-token"]:
+        response = client.post(
+            "/api/ask",
+            json={"question": "What is the inflation target?"},
+            headers={"x-vercel-oidc-token": token},
+        )
+        assert response.status_code == 200
+        assert token not in response.text
+    monkeypatch.delenv("VERCEL")
+    client.post(
+        "/api/ask",
+        json={"question": "What is the inflation target?"},
+        headers={"x-vercel-oidc-token": "untrusted-local-header"},
+    )
+    assert seen == ["first-request-token", "second-request-token", None]
+
+
 def test_interface_headers(client):
     response = client.get("/")
     assert response.status_code == 200

@@ -214,13 +214,13 @@ def _extract(question: str, sources: list[dict]) -> str:
     return "Relevant passages from the dated source documents:\n\n" + "\n\n".join(quotes)
 
 
-def _provider_config() -> tuple[str, str, str] | None:
+def _provider_config(oidc_token: str | None = None) -> tuple[str, str, str] | None:
     if os.getenv("OFI_LLM_ENABLED", "").lower() not in {"1", "true", "yes"}:
         return None
     base = os.getenv("OFI_LLM_BASE_URL", "https://api.openai.com/v1").rstrip("/")
     key = os.getenv("OFI_LLM_API_KEY")
     if urlparse(base).hostname == "ai-gateway.vercel.sh":
-        key = key or os.getenv("AI_GATEWAY_API_KEY") or os.getenv("VERCEL_OIDC_TOKEN")
+        key = key or os.getenv("AI_GATEWAY_API_KEY") or oidc_token or os.getenv("VERCEL_OIDC_TOKEN")
     model = os.getenv("OFI_LLM_MODEL", "")
     if not key or not model or not base.startswith("https://"):
         return None
@@ -311,7 +311,7 @@ def _generate(question: str, sources: list[dict], config: tuple[str, str, str]) 
         return None
 
 
-def answer_question(question: str) -> dict:
+def answer_question(question: str, *, oidc_token: str | None = None) -> dict:
     question = question.strip()
     result = retrieve(question)
     response = {
@@ -333,7 +333,7 @@ def answer_question(question: str) -> dict:
         return response
     sources = [_source(hit, i + 1) for i, hit in enumerate(result["hits"])]
     response["sources"] = sources
-    config = _provider_config()
+    config = _provider_config(oidc_token)
     if config:
         generated = _generate(question, sources, config)
         if generated:

@@ -48,6 +48,8 @@ Environment variables:
 
 On Vercel, `https://ai-gateway.vercel.sh/v1` supports gateway models. Availability, authentication and credit quotas must be verified on the actual deployment; a configured environment variable alone does not establish a successful generation. The code never purchases credits or enables top-ups.
 
+Vercel runtime authentication uses its reserved `x-vercel-oidc-token` request header; the environment variable is a local/build fallback. The token is passed directly into the current call, never written into shared process state, and only forwarded to the exact AI Gateway hostname.
+
 ## Reproducible evaluation
 
 `python scripts/evaluate_rag.py` uses 36 manually authored labelled questions in `data/corpus/evaluation_queries.json`: **12 validation, 24 held-out test**. The query set was fixed before threshold calibration. Only validation is used to select among 11 thresholds: minimise false answers to unanswerable questions, then maximise answerability F1, then prefer the lower threshold. The held-out labels are not used in this choice. Hashes identify the exact corpus and query set.

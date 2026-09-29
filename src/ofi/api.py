@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import time
 from collections import defaultdict, deque
 from datetime import date
@@ -260,7 +261,10 @@ async def ask(payload: Question, request: Request):
             429, "Please wait a minute before asking again.", headers={"Retry-After": "60"}
         )
     _, _, rag = modules()
-    result = await run_in_threadpool(rag.answer_question, payload.question)
+    # Vercel supplies a fresh token on each function request. It is never copied
+    # into process-wide environment state, logged, or returned to the browser.
+    oidc_token = request.headers.get("x-vercel-oidc-token") if os.getenv("VERCEL") == "1" else None
+    result = await run_in_threadpool(rag.answer_question, payload.question, oidc_token=oidc_token)
     request.state.retrieval_mode = result.get("mode")
     request.state.abstained = result.get("abstained")
     return result
